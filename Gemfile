@@ -1,7 +1,8 @@
+ruby '2.1.2'
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+gem 'rails', '4.0.6'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -35,6 +36,10 @@ gem 'puma'
 
 # Devise for users
 gem 'devise'
+
+gem "refile", require: "refile/rails"
+gem "refile-mini_magick"
+gem "refile-s3"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

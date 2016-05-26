@@ -4,6 +4,7 @@ class DocumentsController < ApplicationController
   respond_to :html
 
   def index
+    @document = Document.new
     @documents = Document.all
     respond_with(@documents)
   end
@@ -13,7 +14,7 @@ class DocumentsController < ApplicationController
   end
 
   def new
-    @document = Document.new
+    @document = current_user.documents.build
     respond_with(@document)
   end
 
@@ -21,9 +22,10 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    @document = Document.new(document_params)
+    @document = current_user.documents.build(document_params)
     @document.save
-    respond_with(@document)
+    redirect_to documents_path
+    flash[:notice] = "The document was uploaded successfully."
   end
 
   def update
@@ -42,6 +44,6 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      params[:document]
+      params.require(:document).permit(:file)
     end
 end
