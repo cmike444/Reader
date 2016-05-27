@@ -1,11 +1,12 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   respond_to :html
 
   def index
     @document = Document.new
-    @documents = Document.all
+    @documents = current_user.documents.all
     respond_with(@documents)
   end
 
